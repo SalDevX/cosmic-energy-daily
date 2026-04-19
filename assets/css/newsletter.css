@@ -1,0 +1,50 @@
+.newsletter-section{padding:3rem 0;border-top:1px solid var(--border);text-align:center}
+.nl-heading{font-family:'Cinzel',serif;font-size:clamp(1rem,3vw,1.5rem);font-weight:600;letter-spacing:.25em;color:var(--gold);text-transform:uppercase;margin-bottom:.75rem}
+.nl-sub{font-style:italic;color:var(--text-dim);font-size:1rem;margin-bottom:2rem;letter-spacing:.03em}
+.nl-fields{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap;margin-bottom:1rem}
+.nl-fields input[type="email"],
+.nl-fields select{
+  background:var(--surface);
+  border:1px solid var(--border);
+  color:var(--text);
+  font-family:'Cormorant Garamond',Georgia,serif;
+  font-size:.95rem;
+  padding:.65rem 1rem;
+  border-radius:2px;
+  outline:none;
+  transition:border-color .2s;
+  appearance:none;
+  -webkit-appearance:none;
+}
+.nl-fields input[type="email"]{width:260px}
+.nl-fields select{width:160px;cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%238A6F2E'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right .8rem center;padding-right:2rem}
+.nl-fields select option{background:var(--deep2);color:var(--text)}
+.nl-fields input[type="email"]:focus,
+.nl-fields select:focus{border-color:var(--gold)}
+.nl-fields input[type="email"]::placeholder{color:var(--text-dim)}
+#nl-btn{
+  font-family:'Cinzel',serif;
+  font-size:.62rem;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--deep);
+  background:var(--gold);
+  border:none;
+  padding:.7rem 1.6rem;
+  border-radius:2px;
+  cursor:pointer;
+  transition:opacity .2s;
+  white-space:nowrap;
+}
+#nl-btn:hover{opacity:.85}
+#nl-btn:disabled{opacity:.5;cursor:default}
+.nl-agree-label{display:inline-flex;align-items:center;gap:.5rem;font-size:.82rem;color:var(--text-dim);cursor:pointer;margin-bottom:.75rem}
+.nl-agree-label input[type="checkbox"]{accent-color:var(--gold);width:14px;height:14px;cursor:pointer}
+.nl-agree-label a{color:var(--gold-dim);text-decoration:underline}
+.nl-agree-label a:hover{color:var(--gold)}
+.nl-msg{min-height:1.4em;font-size:.9rem;font-style:italic;margin-top:.25rem}
+@media(max-width:600px){
+  .nl-fields{flex-direction:column;align-items:center}
+  .nl-fields input[type="email"],.nl-fields select{width:100%;max-width:320px}
+  #nl-btn{width:100%;max-width:320px}
+}

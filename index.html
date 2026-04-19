@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="assets/css/layout.css">
 <link rel="stylesheet" href="assets/css/wheel.css">
 <link rel="stylesheet" href="assets/css/video.css">
+<link rel="stylesheet" href="assets/css/newsletter.css">
 </head>
 <body>
 
@@ -104,6 +105,29 @@
     </div>
   </section>
 
+  <section class="newsletter-section">
+    <h2 class="nl-heading">Join the Cosmic Circle</h2>
+    <p class="nl-sub">Weekly readings, lunar alerts &amp; cosmic insights — delivered to you.</p>
+    <form id="newsletter-form" autocomplete="off">
+      <div class="nl-fields">
+        <input type="email" id="nl-email" placeholder="your@email.com" required>
+        <select id="nl-sign" required>
+          <option value="">Your sign</option>
+          <option>Aries</option><option>Taurus</option><option>Gemini</option>
+          <option>Cancer</option><option>Leo</option><option>Virgo</option>
+          <option>Libra</option><option>Scorpio</option><option>Sagittarius</option>
+          <option>Capricorn</option><option>Aquarius</option><option>Pisces</option>
+        </select>
+        <button type="submit" id="nl-btn">Subscribe</button>
+      </div>
+      <label class="nl-agree-label">
+        <input type="checkbox" id="nl-agree" required>
+        I agree to the <a href="/privacy.html" target="_blank">privacy policy</a>
+      </label>
+      <p id="nl-msg" class="nl-msg"></p>
+    </form>
+  </section>
+
   <footer>© 2026 Cosmic Energy Daily &nbsp;·&nbsp; Guided by the stars, grounded in truth</footer>
 </div>
 
@@ -111,5 +135,6 @@
 <script src="assets/js/wheel.js"></script>
 <script src="assets/js/stars.js"></script>
 <script src="assets/js/sol.js"></script>
+<script src="assets/js/newsletter.js"></script>
 </body>
 </html>
