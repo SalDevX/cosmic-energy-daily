@@ -1,4 +1,4 @@
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxIri8Saa_zWlTiHJHxW5jDpBKQZWNDgB2zJt7N3VGXirGMDCNeFnRee7Kyra1-uAXi/exec';
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzCDo8bOVUUBsGJlWlAMIUDegu1hA_HbkbwQQBqVNS1LhcDRa7dN0QcavmgCMRHCQ4K/exec';
 
 function initNewsletter() {
   const form = document.getElementById('newsletter-form');
