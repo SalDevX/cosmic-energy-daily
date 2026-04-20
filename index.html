@@ -1,146 +1,305 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cosmic Energy Daily — Your Daily Horoscope</title>
-<meta name="description" content="Daily horoscope readings for all 12 zodiac signs. Mystical, cinematic, and grounded in celestial truth.">
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
-<link rel="icon" type="image/x-icon" href="assets/favicon.ico">
-<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
-<link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="192x192" href="assets/favicon-192x192.png">
-<link rel="manifest" href="assets/site.webmanifest">
-<link rel="stylesheet" href="assets/css/main.css">
-<link rel="stylesheet" href="assets/css/layout.css">
-<link rel="stylesheet" href="assets/css/wheel.css">
-<link rel="stylesheet" href="assets/css/video.css">
-<link rel="stylesheet" href="assets/css/newsletter.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Cosmic Energy Daily — Your Daily Horoscope</title>
+  <meta name="description" content="Daily horoscope readings for all 12 zodiac signs. Mystical, cinematic, and grounded in celestial truth.">
+  <meta name="theme-color" content="#04060F">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Cosmic Energy">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Cosmic Energy Daily">
+  <meta property="og:description" content="Ancient wisdom. Celestial precision. Daily guidance.">
+  <meta property="og:image" content="assets/og-image.png">
+  <meta property="og:url" content="https://cosmic-energy-daily.com">
+
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+
+  <!-- Favicons (keep existing) -->
+  <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+  <link rel="manifest" href="assets/site.webmanifest">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="assets/css/main.css">
+  <link rel="stylesheet" href="assets/css/app.css">
+
+  <!-- PWA Service Worker -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/sw.js').catch(() => {});
+    }
+  </script>
 </head>
 <body>
+  <canvas id="stars"></canvas>
 
-<canvas id="stars"></canvas>
+  <!-- ── MOBILE BOTTOM NAV ── -->
+  <nav class="bottom-nav" id="bottom-nav">
+    <button class="nav-btn active" data-screen="home" onclick="showScreen('home')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/></svg>
+      <span>Home</span>
+    </button>
+    <button class="nav-btn" data-screen="discover" onclick="showScreen('discover')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+      <span>Discover</span>
+    </button>
+    <button class="nav-btn" data-screen="moon" onclick="showScreen('moon')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+      <span>Moon</span>
+    </button>
+    <button class="nav-btn" data-screen="saved" onclick="showScreen('saved')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg>
+      <span>Saved</span>
+    </button>
+    <button class="nav-btn" data-screen="profile" onclick="showScreen('profile')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+      <span>Profile</span>
+    </button>
+  </nav>
 
-<div class="wrap">
-  <header>
-    <svg class="logo-sol" viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <radialGradient id="sg" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stop-color="#6B7FD4" stop-opacity="0.9"/>
-          <stop offset="100%" stop-color="#C9A84C" stop-opacity="0.6"/>
-        </radialGradient>
-      </defs>
-      <g fill="none" stroke="url(#sg)" stroke-width="0.8" opacity="0.9">
-        <circle cx="26" cy="26" r="8"/>
-        <circle cx="26" cy="18" r="8"/>
-        <circle cx="26" cy="34" r="8"/>
-        <circle cx="33" cy="22" r="8"/>
-        <circle cx="33" cy="30" r="8"/>
-        <circle cx="19" cy="22" r="8"/>
-        <circle cx="19" cy="30" r="8"/>
-        <circle cx="26" cy="26" r="16" stroke-opacity="0.3"/>
-      </g>
-    </svg>
-    <h1>Cosmic Energy Daily</h1>
-    <p class="tagline">Ancient wisdom. Celestial precision. Daily guidance.</p>
-  </header>
-
-  <div class="date-bar" id="date-bar">—</div>
-
-  <section class="wheel-section">
-    <p class="wheel-title">Select your sign</p>
-    <div class="wheel-outer">
-    <div class="zodiac-wheel" id="wheel">
-      <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:480px;height:480px;border-radius:50%;border:1px solid var(--border)"></div>
-      <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:340px;height:340px;border-radius:50%;border:1px dashed rgba(201,168,76,0.15)"></div>
-
-      <svg id="sol-svg" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:190px;height:190px;overflow:visible" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- ── DESKTOP SIDEBAR ── -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <svg class="logo-eye" viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg">
         <defs>
-          <radialGradient id="solg1" cx="50%" cy="30%" r="70%">
-            <stop offset="0%" stop-color="#5B7FE8" stop-opacity="0.7"/>
-            <stop offset="60%" stop-color="#8B4DB8" stop-opacity="0.5"/>
-            <stop offset="100%" stop-color="#D4234A" stop-opacity="0.3"/>
+          <radialGradient id="sg" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#6B7FD4" stop-opacity="0.9"/>
+            <stop offset="100%" stop-color="#C9A84C" stop-opacity="0.6"/>
           </radialGradient>
-          <radialGradient id="solg2" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stop-color="#4A6FD4" stop-opacity="0.12"/>
-            <stop offset="100%" stop-color="#D4234A" stop-opacity="0.04"/>
-          </radialGradient>
-          <clipPath id="solclip">
-            <circle cx="100" cy="100" r="94"/>
-          </clipPath>
         </defs>
-        <circle cx="100" cy="100" r="92" fill="none" stroke="rgba(201,168,76,0.12)" stroke-width="0.5"/>
-        <circle cx="100" cy="100" r="90" fill="url(#solg2)"/>
-        <g clip-path="url(#solclip)" fill="none" stroke="url(#solg1)" stroke-width="0.9">
-          <circle cx="100" cy="100" r="34"/>
-          <circle cx="100" cy="66"  r="34"/>
-          <circle cx="129.4" cy="83"  r="34"/>
-          <circle cx="129.4" cy="117" r="34"/>
-          <circle cx="100" cy="134" r="34"/>
-          <circle cx="70.6" cy="117" r="34"/>
-          <circle cx="70.6" cy="83"  r="34"/>
-          <circle cx="100" cy="100" r="68" stroke-opacity="0.2"/>
+        <g fill="none" stroke="url(#sg)" stroke-width="0.8" opacity="0.9">
+          <circle cx="26" cy="26" r="8"/><circle cx="26" cy="18" r="8"/>
+          <circle cx="26" cy="34" r="8"/><circle cx="33" cy="22" r="8"/>
+          <circle cx="33" cy="30" r="8"/><circle cx="19" cy="22" r="8"/>
+          <circle cx="19" cy="30" r="8"/>
+          <circle cx="26" cy="26" r="16" stroke-opacity="0.3"/>
         </g>
-        <circle cx="100" cy="100" r="3" fill="#C9A84C" opacity="0.8"/>
       </svg>
-    </div>
-    </div>
-  </section>
-
-  <section class="video-section" id="video-section">
-    <div class="video-header" id="video-header" style="display:none">
-      <div class="video-sign-symbol-large" id="vs-symbol"></div>
-      <div class="video-sign-info">
-        <h2 id="vs-name"></h2>
-        <p id="vs-dates"></p>
+      <div>
+        <div class="sidebar-title">Cosmic Energy</div>
+        <div class="sidebar-sub">Daily</div>
       </div>
     </div>
-    <div class="video-embed-wrap">
-      <div class="video-frame" id="video-frame">
-        <div class="video-placeholder">
-          <div class="ph-symbol">☽</div>
-          <p style="font-size:.9rem;text-align:center;line-height:1.6">Select a sign above<br>to reveal today's reading</p>
+    <nav class="sidebar-nav">
+      <button class="snav-btn active" data-screen="home" onclick="showScreen('home')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/></svg>
+        Today's Reading
+      </button>
+      <button class="snav-btn" data-screen="discover" onclick="showScreen('discover')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+        Discover
+      </button>
+      <button class="snav-btn" data-screen="moon" onclick="showScreen('moon')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+        Moon Calendar
+      </button>
+      <button class="snav-btn" data-screen="saved" onclick="showScreen('saved')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg>
+        Saved Readings
+      </button>
+      <button class="snav-btn" data-screen="profile" onclick="showScreen('profile')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+        Profile
+      </button>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="moon-badge" id="sidebar-moon">☽ Loading...</div>
+    </div>
+  </aside>
+
+  <!-- ── MAIN CONTENT ── -->
+  <main class="app-main">
+
+    <!-- ══ SCREEN: HOME ══ -->
+    <section class="screen active" id="screen-home">
+      <header class="app-header">
+        <div class="header-left">
+          <div class="date-pill" id="date-pill">—</div>
+          <h1 class="header-title">Today's Reading</h1>
+        </div>
+        <div class="moon-chip" id="moon-chip">☽</div>
+      </header>
+
+      <!-- Sign not selected yet -->
+      <div id="home-empty" class="home-empty">
+        <div class="empty-glow"></div>
+        <svg class="hero-logo" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="hg" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#6B7FD4" stop-opacity="0.9"/>
+              <stop offset="100%" stop-color="#C9A84C" stop-opacity="0.5"/>
+            </radialGradient>
+          </defs>
+          <g fill="none" stroke="url(#hg)" stroke-width="1.2">
+            <circle cx="60" cy="60" r="20"/><circle cx="60" cy="40" r="20"/>
+            <circle cx="60" cy="80" r="20"/><circle cx="77" cy="50" r="20"/>
+            <circle cx="77" cy="70" r="20"/><circle cx="43" cy="50" r="20"/>
+            <circle cx="43" cy="70" r="20"/>
+            <circle cx="60" cy="60" r="40" stroke-opacity="0.2"/>
+          </g>
+        </svg>
+        <h2 class="empty-heading">Choose Your Sign</h2>
+        <p class="empty-sub">Select your zodiac sign to reveal today's cosmic reading</p>
+        <div class="sign-grid" id="sign-grid-home">
+          <!-- populated by JS -->
         </div>
       </div>
-      <div class="sign-details" id="sign-details" style="display:none">
-        <div class="detail-row" id="detail-row"></div>
-        <p class="sign-description" id="sign-desc"></p>
-        <a class="yt-link" href="https://youtube.com/@CosmicEnergyDaily" target="_blank">&#x25B6; Watch on YouTube</a>
+
+      <!-- Reading view (shown after sign selected) -->
+      <div id="home-reading" class="home-reading" style="display:none">
+        <div class="reading-card glass">
+          <div class="reading-card-header">
+            <div class="sign-avatar" id="r-symbol"></div>
+            <div>
+              <div class="sign-name" id="r-name"></div>
+              <div class="sign-dates" id="r-dates"></div>
+            </div>
+            <button class="bookmark-btn" id="bookmark-btn" onclick="toggleBookmark()" title="Save reading">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg>
+            </button>
+          </div>
+
+          <div class="energy-bars">
+            <div class="energy-row"><span>Love</span><div class="bar-track"><div class="bar-fill" id="bar-love"></div></div></div>
+            <div class="energy-row"><span>Career</span><div class="bar-track"><div class="bar-fill" id="bar-career"></div></div></div>
+            <div class="energy-row"><span>Wellness</span><div class="bar-track"><div class="bar-fill" id="bar-wellness"></div></div></div>
+            <div class="energy-row"><span>Spirit</span><div class="bar-track"><div class="bar-fill" id="bar-spirit"></div></div></div>
+          </div>
+
+          <div class="detail-tags" id="r-tags"></div>
+          <p class="sign-description" id="r-desc"></p>
+
+          <button class="watch-btn" id="watch-btn" onclick="openVideo()">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            Watch Today's Reading
+          </button>
+        </div>
+
+        <!-- Video embed -->
+        <div class="video-wrap glass" id="video-wrap" style="display:none">
+          <div class="video-frame" id="video-frame"></div>
+        </div>
+
+        <button class="change-sign-btn" onclick="changeSign()">↩ Change Sign</button>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="newsletter-section">
-    <h2 class="nl-heading">Join the Cosmic Circle</h2>
-    <p class="nl-sub">Weekly readings, lunar alerts &amp; cosmic insights — delivered to you.</p>
-    <form id="newsletter-form" autocomplete="off">
-      <div class="nl-fields">
-        <input type="email" id="nl-email" placeholder="your@email.com" required>
-        <select id="nl-sign" required>
-          <option value="">Your sign</option>
-          <option>Aries</option><option>Taurus</option><option>Gemini</option>
-          <option>Cancer</option><option>Leo</option><option>Virgo</option>
-          <option>Libra</option><option>Scorpio</option><option>Sagittarius</option>
-          <option>Capricorn</option><option>Aquarius</option><option>Pisces</option>
-        </select>
-        <button type="submit" id="nl-btn">Subscribe</button>
+    <!-- ══ SCREEN: DISCOVER ══ -->
+    <section class="screen" id="screen-discover">
+      <header class="app-header">
+        <h1 class="header-title">Discover</h1>
+        <div class="filter-pills">
+          <button class="filter-pill active" onclick="filterSigns('all', this)">All</button>
+          <button class="filter-pill" onclick="filterSigns('fire', this)">🔥 Fire</button>
+          <button class="filter-pill" onclick="filterSigns('earth', this)">🌿 Earth</button>
+          <button class="filter-pill" onclick="filterSigns('air', this)">💨 Air</button>
+          <button class="filter-pill" onclick="filterSigns('water', this)">💧 Water</button>
+        </div>
+      </header>
+      <div class="discover-grid" id="discover-grid">
+        <!-- populated by JS -->
       </div>
-      <label class="nl-agree-label">
-        <input type="checkbox" id="nl-agree" required>
-        I agree to the <a href="/privacy.html" target="_blank">privacy policy</a>
-      </label>
-      <p id="nl-msg" class="nl-msg"></p>
-    </form>
-  </section>
+    </section>
 
-  <footer>© 2026 Cosmic Energy Daily &nbsp;·&nbsp; Guided by the stars, grounded in truth</footer>
-</div>
+    <!-- ══ SCREEN: MOON ══ -->
+    <section class="screen" id="screen-moon">
+      <header class="app-header">
+        <h1 class="header-title">Moon Calendar</h1>
+        <div class="moon-phase-display" id="moon-phase-display">☽</div>
+      </header>
+      <div class="moon-card glass">
+        <div class="moon-hero">
+          <div class="moon-orb" id="moon-orb">🌙</div>
+          <div class="moon-info">
+            <div class="moon-name" id="moon-name">Waning Crescent</div>
+            <div class="moon-desc" id="moon-desc">A time for release, rest and reflection.</div>
+          </div>
+        </div>
+        <div class="moon-calendar" id="moon-calendar">
+          <!-- populated by JS -->
+        </div>
+      </div>
+    </section>
 
-<script src="assets/js/data.js"></script>
-<script src="assets/js/wheel.js"></script>
-<script src="assets/js/stars.js"></script>
-<script src="assets/js/sol.js"></script>
-<script src="assets/js/newsletter.js"></script>
+    <!-- ══ SCREEN: SAVED ══ -->
+    <section class="screen" id="screen-saved">
+      <header class="app-header">
+        <h1 class="header-title">Saved Readings</h1>
+      </header>
+      <div id="saved-list" class="saved-list">
+        <div class="empty-state">
+          <div style="font-size:2.5rem;margin-bottom:1rem">🔖</div>
+          <p>No saved readings yet.<br>Tap the bookmark on any reading to save it.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ SCREEN: PROFILE ══ -->
+    <section class="screen" id="screen-profile">
+      <header class="app-header">
+        <h1 class="header-title">Profile</h1>
+      </header>
+      <div class="profile-card glass">
+        <div class="profile-avatar" id="profile-avatar">✦</div>
+        <div class="profile-sign" id="profile-sign-name">Set your sign</div>
+        <div class="profile-sign-dates" id="profile-sign-dates"></div>
+      </div>
+
+      <div class="settings-list glass">
+        <div class="settings-row">
+          <span>My Sign</span>
+          <select id="profile-sign-select" onchange="setProfileSign(this.value)">
+            <option value="">Choose sign</option>
+          </select>
+        </div>
+        <div class="settings-row">
+          <span>Notifications</span>
+          <label class="toggle"><input type="checkbox" id="notif-toggle"><span class="slider"></span></label>
+        </div>
+        <div class="settings-row">
+          <span>Dark Mode</span>
+          <label class="toggle"><input type="checkbox" checked id="dark-toggle"><span class="slider"></span></label>
+        </div>
+      </div>
+
+      <!-- Newsletter -->
+      <div class="newsletter-card glass">
+        <h3 class="nl-title">Join the Cosmic Circle</h3>
+        <p class="nl-sub">Weekly readings, lunar alerts & cosmic insights — delivered to you.</p>
+        <div class="nl-form">
+          <input type="email" id="nl-email" placeholder="your@email.com" class="nl-input">
+          <select id="nl-sign" class="nl-input">
+            <option value="">Your sign</option>
+            <option>Aries</option><option>Taurus</option><option>Gemini</option>
+            <option>Cancer</option><option>Leo</option><option>Virgo</option>
+            <option>Libra</option><option>Scorpio</option><option>Sagittarius</option>
+            <option>Capricorn</option><option>Aquarius</option><option>Pisces</option>
+          </select>
+          <label class="nl-agree">
+            <input type="checkbox" id="nl-agree">
+            I agree to the <a href="/privacy.html" target="_blank">privacy policy</a>
+          </label>
+          <button class="nl-btn" onclick="submitNewsletter()">Subscribe</button>
+          <p id="nl-msg" class="nl-msg"></p>
+        </div>
+      </div>
+
+      <footer class="app-footer">
+        © 2026 Cosmic Energy Daily · Guided by the stars, grounded in truth
+      </footer>
+    </section>
+
+  </main>
+
+  <!-- Scripts — keep your existing pipeline intact -->
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/stars.js"></script>
+  <script src="assets/js/app-ui.js"></script>
 </body>
 </html>
