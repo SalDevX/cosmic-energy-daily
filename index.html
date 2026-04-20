@@ -9,176 +9,127 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="Cosmic Energy">
-
-  <!-- Open Graph -->
-  <meta property="og:title" content="Cosmic Energy Daily">
-  <meta property="og:description" content="Ancient wisdom. Celestial precision. Daily guidance.">
-  <meta property="og:image" content="assets/og-image.png">
-  <meta property="og:url" content="https://cosmic-energy-daily.com">
-
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
-
-  <!-- Favicons (keep existing) -->
   <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
   <link rel="manifest" href="assets/site.webmanifest">
-
-  <!-- Styles -->
   <link rel="stylesheet" href="assets/css/main.css">
   <link rel="stylesheet" href="assets/css/app.css">
-
-  <!-- PWA Service Worker -->
-  <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/sw.js').catch(() => {});
-    }
-  </script>
+  <script>if('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js').catch(()=>{});</script>
 </head>
 <body>
-  <canvas id="stars"></canvas>
+<canvas id="stars"></canvas>
 
-  <!-- ── MOBILE BOTTOM NAV ── -->
-  <nav class="bottom-nav" id="bottom-nav">
-    <button class="nav-btn active" data-screen="home" onclick="showScreen('home')">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/></svg>
-      <span>Home</span>
-    </button>
-    <button class="nav-btn" data-screen="discover" onclick="showScreen('discover')">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
-      <span>Discover</span>
-    </button>
-    <button class="nav-btn" data-screen="moon" onclick="showScreen('moon')">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
-      <span>Moon</span>
-    </button>
-    <button class="nav-btn" data-screen="saved" onclick="showScreen('saved')">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg>
-      <span>Saved</span>
-    </button>
-    <button class="nav-btn" data-screen="profile" onclick="showScreen('profile')">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
-      <span>Profile</span>
-    </button>
+<!-- ══ ONBOARDING (shown if no sign set) ══ -->
+<div id="onboarding-screen" class="onboarding-screen" style="display:none">
+  <div class="ob-inner">
+    <div class="ob-glow"></div>
+    <svg class="ob-logo" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+      <defs><radialGradient id="og" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#6B7FD4" stop-opacity="0.9"/><stop offset="100%" stop-color="#C9A84C" stop-opacity="0.5"/></radialGradient></defs>
+      <g fill="none" stroke="url(#og)" stroke-width="1.2">
+        <circle cx="60" cy="60" r="20"/><circle cx="60" cy="40" r="20"/><circle cx="60" cy="80" r="20"/>
+        <circle cx="77" cy="50" r="20"/><circle cx="77" cy="70" r="20"/>
+        <circle cx="43" cy="50" r="20"/><circle cx="43" cy="70" r="20"/>
+        <circle cx="60" cy="60" r="40" stroke-opacity="0.2"/>
+      </g>
+    </svg>
+    <div class="ob-title">Cosmic Energy Daily</div>
+    <div class="ob-sub">Choose your celestial guide</div>
+    <div class="sign-grid" id="sign-grid-onboarding"></div>
+  </div>
+</div>
+
+<!-- ══ MAIN APP ══ -->
+<div id="app-shell" style="display:none">
+
+  <!-- MOBILE BOTTOM NAV -->
+  <nav class="bottom-nav">
+    <button class="nav-btn active" data-screen="home"     onclick="showScreen('home')">    <span class="nav-icon">☽</span><span class="nav-label">Today</span>    <span class="nav-dot"></span></button>
+    <button class="nav-btn"        data-screen="discover" onclick="showScreen('discover')"><span class="nav-icon">✦</span><span class="nav-label">Discover</span> <span class="nav-dot"></span></button>
+    <button class="nav-btn"        data-screen="moon"     onclick="showScreen('moon')">    <span class="nav-icon" id="tab-moon-icon">🌗</span><span class="nav-label">Moon</span><span class="nav-dot"></span></button>
+    <button class="nav-btn"        data-screen="saved"    onclick="showScreen('saved')">   <span class="nav-icon">♡</span><span class="nav-label">Saved</span>    <span class="nav-dot"></span></button>
+    <button class="nav-btn"        data-screen="profile"  onclick="showScreen('profile')"> <span class="nav-icon">◯</span><span class="nav-label">You</span>      <span class="nav-dot"></span></button>
   </nav>
 
-  <!-- ── DESKTOP SIDEBAR ── -->
+  <!-- DESKTOP SIDEBAR -->
   <aside class="sidebar">
     <div class="sidebar-logo">
       <svg class="logo-eye" viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <radialGradient id="sg" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stop-color="#6B7FD4" stop-opacity="0.9"/>
-            <stop offset="100%" stop-color="#C9A84C" stop-opacity="0.6"/>
-          </radialGradient>
-        </defs>
+        <defs><radialGradient id="sg" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#6B7FD4" stop-opacity="0.9"/><stop offset="100%" stop-color="#C9A84C" stop-opacity="0.6"/></radialGradient></defs>
         <g fill="none" stroke="url(#sg)" stroke-width="0.8" opacity="0.9">
-          <circle cx="26" cy="26" r="8"/><circle cx="26" cy="18" r="8"/>
-          <circle cx="26" cy="34" r="8"/><circle cx="33" cy="22" r="8"/>
-          <circle cx="33" cy="30" r="8"/><circle cx="19" cy="22" r="8"/>
-          <circle cx="19" cy="30" r="8"/>
-          <circle cx="26" cy="26" r="16" stroke-opacity="0.3"/>
+          <circle cx="26" cy="26" r="8"/><circle cx="26" cy="18" r="8"/><circle cx="26" cy="34" r="8"/>
+          <circle cx="33" cy="22" r="8"/><circle cx="33" cy="30" r="8"/><circle cx="19" cy="22" r="8"/>
+          <circle cx="19" cy="30" r="8"/><circle cx="26" cy="26" r="16" stroke-opacity="0.3"/>
         </g>
       </svg>
-      <div>
-        <div class="sidebar-title">Cosmic Energy</div>
-        <div class="sidebar-sub">Daily</div>
-      </div>
+      <div><div class="sidebar-title">Cosmic Energy</div><div class="sidebar-sub">Daily</div></div>
     </div>
     <nav class="sidebar-nav">
-      <button class="snav-btn active" data-screen="home" onclick="showScreen('home')">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/></svg>
-        Today's Reading
-      </button>
-      <button class="snav-btn" data-screen="discover" onclick="showScreen('discover')">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
-        Discover
-      </button>
-      <button class="snav-btn" data-screen="moon" onclick="showScreen('moon')">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
-        Moon Calendar
-      </button>
-      <button class="snav-btn" data-screen="saved" onclick="showScreen('saved')">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg>
-        Saved Readings
-      </button>
-      <button class="snav-btn" data-screen="profile" onclick="showScreen('profile')">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
-        Profile
-      </button>
+      <button class="snav-btn active" data-screen="home"     onclick="showScreen('home')">    <span>☽</span> Today's Reading</button>
+      <button class="snav-btn"        data-screen="discover" onclick="showScreen('discover')"><span>✦</span> Discover</button>
+      <button class="snav-btn"        data-screen="moon"     onclick="showScreen('moon')">    <span>🌗</span> Moon Calendar</button>
+      <button class="snav-btn"        data-screen="saved"    onclick="showScreen('saved')">   <span>♡</span> Saved Readings</button>
+      <button class="snav-btn"        data-screen="profile"  onclick="showScreen('profile')"> <span>◯</span> Profile</button>
     </nav>
-    <div class="sidebar-footer">
-      <div class="moon-badge" id="sidebar-moon">☽ Loading...</div>
-    </div>
+    <div class="sidebar-footer"><div class="moon-badge" id="sidebar-moon">🌗 Loading…</div></div>
   </aside>
 
-  <!-- ── MAIN CONTENT ── -->
+  <!-- MAIN CONTENT -->
   <main class="app-main">
 
-    <!-- ══ SCREEN: HOME ══ -->
+    <!-- ══ HOME ══ -->
     <section class="screen active" id="screen-home">
       <header class="app-header">
-        <div class="header-left">
+        <div>
           <div class="date-pill" id="date-pill">—</div>
           <h1 class="header-title">Today's Reading</h1>
         </div>
-        <div class="moon-chip" id="moon-chip">☽</div>
+        <div class="moon-chip" id="moon-chip">🌗</div>
       </header>
 
-      <!-- Sign not selected yet -->
+      <!-- Empty state -->
       <div id="home-empty" class="home-empty">
         <div class="empty-glow"></div>
         <svg class="hero-logo" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <radialGradient id="hg" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stop-color="#6B7FD4" stop-opacity="0.9"/>
-              <stop offset="100%" stop-color="#C9A84C" stop-opacity="0.5"/>
-            </radialGradient>
-          </defs>
-          <g fill="none" stroke="url(#hg)" stroke-width="1.2">
-            <circle cx="60" cy="60" r="20"/><circle cx="60" cy="40" r="20"/>
-            <circle cx="60" cy="80" r="20"/><circle cx="77" cy="50" r="20"/>
-            <circle cx="77" cy="70" r="20"/><circle cx="43" cy="50" r="20"/>
-            <circle cx="43" cy="70" r="20"/>
+          <g fill="none" stroke="url(#og)" stroke-width="1.2">
+            <circle cx="60" cy="60" r="20"/><circle cx="60" cy="40" r="20"/><circle cx="60" cy="80" r="20"/>
+            <circle cx="77" cy="50" r="20"/><circle cx="77" cy="70" r="20"/>
+            <circle cx="43" cy="50" r="20"/><circle cx="43" cy="70" r="20"/>
             <circle cx="60" cy="60" r="40" stroke-opacity="0.2"/>
           </g>
         </svg>
-        <h2 class="empty-heading">Choose Your Sign</h2>
-        <p class="empty-sub">Select your zodiac sign to reveal today's cosmic reading</p>
-        <div class="sign-grid" id="sign-grid-home">
-          <!-- populated by JS -->
-        </div>
+        <h2 class="empty-heading">Select Your Sign</h2>
+        <p class="empty-sub">Choose your zodiac sign to reveal today's cosmic reading</p>
+        <div class="sign-grid" id="sign-grid-home"></div>
       </div>
 
-      <!-- Reading view (shown after sign selected) -->
-      <div id="home-reading" class="home-reading" style="display:none">
+      <!-- Reading state -->
+      <div id="home-reading" style="display:none">
+
+        <!-- Hero glyph -->
+        <div class="sign-hero">
+          <div class="sign-hero-glow"></div>
+          <div class="hero-symbol" id="r-hero-symbol">♈</div>
+          <div class="hero-name"  id="r-name">Aries</div>
+          <div class="hero-dates" id="r-dates">Mar 21–Apr 19</div>
+          <div class="hero-badges" id="r-badges"></div>
+        </div>
+
+        <!-- Reading card -->
         <div class="reading-card glass">
-          <div class="reading-card-header">
-            <div class="sign-avatar" id="r-symbol"></div>
-            <div>
-              <div class="sign-name" id="r-name"></div>
-              <div class="sign-dates" id="r-dates"></div>
-            </div>
-            <button class="bookmark-btn" id="bookmark-btn" onclick="toggleBookmark()" title="Save reading">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg>
-            </button>
-          </div>
+          <div class="card-label">Today's Reading</div>
+          <p class="reading-text" id="r-desc"></p>
 
+          <!-- Energy bars -->
           <div class="energy-bars">
-            <div class="energy-row"><span>Love</span><div class="bar-track"><div class="bar-fill" id="bar-love"></div></div></div>
-            <div class="energy-row"><span>Career</span><div class="bar-track"><div class="bar-fill" id="bar-career"></div></div></div>
-            <div class="energy-row"><span>Wellness</span><div class="bar-track"><div class="bar-fill" id="bar-wellness"></div></div></div>
-            <div class="energy-row"><span>Spirit</span><div class="bar-track"><div class="bar-fill" id="bar-spirit"></div></div></div>
+            <div class="energy-row"><span class="energy-label">Love</span>   <div class="bar-track"><div class="bar-fill" id="bar-love"></div></div>   <span class="bar-pct" id="bar-pct-love"></span></div>
+            <div class="energy-row"><span class="energy-label">Career</span> <div class="bar-track"><div class="bar-fill" id="bar-career"></div></div> <span class="bar-pct" id="bar-pct-career"></span></div>
+            <div class="energy-row"><span class="energy-label">Health</span> <div class="bar-track"><div class="bar-fill" id="bar-health"></div></div> <span class="bar-pct" id="bar-pct-health"></span></div>
+            <div class="energy-row"><span class="energy-label">Spirit</span> <div class="bar-track"><div class="bar-fill" id="bar-spirit"></div></div> <span class="bar-pct" id="bar-pct-spirit"></span></div>
           </div>
 
-          <div class="detail-tags" id="r-tags"></div>
-          <p class="sign-description" id="r-desc"></p>
-
-          <button class="watch-btn" id="watch-btn" onclick="openVideo()">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-            Watch Today's Reading
-          </button>
+          <button class="gold-btn" onclick="openVideo()">▶&nbsp; Watch Today's Reading</button>
         </div>
 
         <!-- Video embed -->
@@ -186,81 +137,96 @@
           <div class="video-frame" id="video-frame"></div>
         </div>
 
-        <button class="change-sign-btn" onclick="changeSign()">↩ Change Sign</button>
-      </div>
+        <!-- Ruler / Element / Nature stat row -->
+        <div class="stat-row glass">
+          <div class="stat-cell"><div class="stat-label">Ruler</div>  <div class="stat-value" id="stat-ruler"></div></div>
+          <div class="stat-divider"></div>
+          <div class="stat-cell"><div class="stat-label">Element</div><div class="stat-value" id="stat-element"></div></div>
+          <div class="stat-divider"></div>
+          <div class="stat-cell"><div class="stat-label">Nature</div> <div class="stat-value" id="stat-nature"></div></div>
+        </div>
+
+        <!-- Bookmark + Change sign -->
+        <div class="reading-actions">
+          <button class="heart-btn-large" id="bookmark-btn" onclick="toggleBookmark()">♡</button>
+          <button class="change-sign-btn" onclick="changeSign()">↩ Change Sign</button>
+        </div>
+
+      </div><!-- /home-reading -->
     </section>
 
-    <!-- ══ SCREEN: DISCOVER ══ -->
+    <!-- ══ DISCOVER ══ -->
     <section class="screen" id="screen-discover">
       <header class="app-header">
         <h1 class="header-title">Discover</h1>
-        <div class="filter-pills">
-          <button class="filter-pill active" onclick="filterSigns('all', this)">All</button>
-          <button class="filter-pill" onclick="filterSigns('fire', this)">🔥 Fire</button>
-          <button class="filter-pill" onclick="filterSigns('earth', this)">🌿 Earth</button>
-          <button class="filter-pill" onclick="filterSigns('air', this)">💨 Air</button>
-          <button class="filter-pill" onclick="filterSigns('water', this)">💧 Water</button>
-        </div>
       </header>
-      <div class="discover-grid" id="discover-grid">
-        <!-- populated by JS -->
+      <div class="filter-row">
+        <button class="filter-pill active" onclick="filterDiscover('All',this)"   style="border-color:#C9A84C;color:#C9A84C;background:rgba(201,168,76,0.1)">All</button>
+        <button class="filter-pill" onclick="filterDiscover('Fire',this)">🔥 Fire</button>
+        <button class="filter-pill" onclick="filterDiscover('Earth',this)">🌿 Earth</button>
+        <button class="filter-pill" onclick="filterDiscover('Air',this)">💨 Air</button>
+        <button class="filter-pill" onclick="filterDiscover('Water',this)">💧 Water</button>
       </div>
+      <div id="discover-list" class="discover-list"></div>
     </section>
 
-    <!-- ══ SCREEN: MOON ══ -->
+    <!-- ══ MOON ══ -->
     <section class="screen" id="screen-moon">
       <header class="app-header">
-        <h1 class="header-title">Moon Calendar</h1>
-        <div class="moon-phase-display" id="moon-phase-display">☽</div>
+        <h1 class="header-title">Moon</h1>
+        <div class="moon-chip" id="moon-phase-display">🌗</div>
       </header>
-      <div class="moon-card glass">
-        <div class="moon-hero">
-          <div class="moon-orb" id="moon-orb">🌙</div>
-          <div class="moon-info">
-            <div class="moon-name" id="moon-name">Waning Crescent</div>
-            <div class="moon-desc" id="moon-desc">A time for release, rest and reflection.</div>
-          </div>
-        </div>
-        <div class="moon-calendar" id="moon-calendar">
-          <!-- populated by JS -->
+
+      <!-- Moon hero -->
+      <div class="moon-hero glass">
+        <div class="moon-orb" id="moon-orb">🌗</div>
+        <div>
+          <div class="moon-name" id="moon-name">Loading…</div>
+          <div class="moon-desc" id="moon-desc"></div>
         </div>
       </div>
+
+      <!-- Month nav -->
+      <div class="month-nav">
+        <button class="month-arrow" onclick="prevMonth()">‹</button>
+        <span class="month-label" id="moon-month-label">April 2026</span>
+        <button class="month-arrow" onclick="nextMonth()">›</button>
+      </div>
+
+      <!-- Calendar + legend injected here -->
+      <div id="moon-calendar"></div>
     </section>
 
-    <!-- ══ SCREEN: SAVED ══ -->
+    <!-- ══ SAVED ══ -->
     <section class="screen" id="screen-saved">
       <header class="app-header">
-        <h1 class="header-title">Saved Readings</h1>
+        <h1 class="header-title">Saved</h1>
       </header>
-      <div id="saved-list" class="saved-list">
-        <div class="empty-state">
-          <div style="font-size:2.5rem;margin-bottom:1rem">🔖</div>
-          <p>No saved readings yet.<br>Tap the bookmark on any reading to save it.</p>
-        </div>
-      </div>
+      <div id="saved-list"></div>
     </section>
 
-    <!-- ══ SCREEN: PROFILE ══ -->
+    <!-- ══ PROFILE ══ -->
     <section class="screen" id="screen-profile">
       <header class="app-header">
         <h1 class="header-title">Profile</h1>
       </header>
+
+      <!-- Profile card -->
       <div class="profile-card glass">
         <div class="profile-avatar" id="profile-avatar">✦</div>
-        <div class="profile-sign" id="profile-sign-name">Set your sign</div>
+        <div class="profile-sign-name"  id="profile-sign-name">Set your sign</div>
         <div class="profile-sign-dates" id="profile-sign-dates"></div>
       </div>
 
-      <div class="settings-list glass">
+      <!-- Settings -->
+      <div class="settings-card glass">
         <div class="settings-row">
           <span>My Sign</span>
-          <select id="profile-sign-select" onchange="setProfileSign(this.value)">
-            <option value="">Choose sign</option>
-          </select>
+          <select id="profile-sign-select" onchange="setProfileSign(this.value)"><option value="">Choose sign</option></select>
         </div>
         <div class="settings-row">
-          <span>Notifications</span>
-          <label class="toggle"><input type="checkbox" id="notif-toggle"><span class="slider"></span></label>
+          <span>Push Notifications</span>
+          <span class="settings-detail">Daily 9:00 AM ›</span>
         </div>
         <div class="settings-row">
           <span>Dark Mode</span>
@@ -268,38 +234,71 @@
         </div>
       </div>
 
+      <div class="settings-card glass">
+        <div class="settings-row"><span>Newsletter</span>        <span class="settings-detail">Weekly ›</span></div>
+        <div class="settings-row"><span>Cosmic Circle</span>     <span class="settings-detail">Free ›</span></div>
+        <div class="settings-row last"><span>Privacy Policy</span><span class="settings-detail">›</span></div>
+      </div>
+
       <!-- Newsletter -->
-      <div class="newsletter-card glass">
+      <div class="nl-card glass">
+        <div class="nl-eyebrow">✦ &nbsp;Cosmic Circle&nbsp; ✦</div>
         <h3 class="nl-title">Join the Cosmic Circle</h3>
         <p class="nl-sub">Weekly readings, lunar alerts & cosmic insights — delivered to you.</p>
-        <div class="nl-form">
-          <input type="email" id="nl-email" placeholder="your@email.com" class="nl-input">
-          <select id="nl-sign" class="nl-input">
-            <option value="">Your sign</option>
-            <option>Aries</option><option>Taurus</option><option>Gemini</option>
-            <option>Cancer</option><option>Leo</option><option>Virgo</option>
-            <option>Libra</option><option>Scorpio</option><option>Sagittarius</option>
-            <option>Capricorn</option><option>Aquarius</option><option>Pisces</option>
-          </select>
-          <label class="nl-agree">
-            <input type="checkbox" id="nl-agree">
-            I agree to the <a href="/privacy.html" target="_blank">privacy policy</a>
-          </label>
-          <button class="nl-btn" onclick="submitNewsletter()">Subscribe</button>
-          <p id="nl-msg" class="nl-msg"></p>
+
+        <div id="nl-form-wrap">
+          <div class="nl-form">
+            <input type="email" id="nl-email" placeholder="your@email.com" class="nl-input">
+            <select id="nl-sign" class="nl-input">
+              <option value="">Your sign</option>
+              <option>Aries</option><option>Taurus</option><option>Gemini</option>
+              <option>Cancer</option><option>Leo</option><option>Virgo</option>
+              <option>Libra</option><option>Scorpio</option><option>Sagittarius</option>
+              <option>Capricorn</option><option>Aquarius</option><option>Pisces</option>
+            </select>
+            <label class="nl-agree"><input type="checkbox" id="nl-agree"> I agree to the <a href="/privacy.html" target="_blank">privacy policy</a></label>
+            <button class="gold-btn" onclick="submitNewsletter()">Subscribe to the Cosmic Circle</button>
+            <p id="nl-msg" class="nl-msg"></p>
+          </div>
+        </div>
+
+        <div id="nl-success" class="nl-success" style="display:none">
+          <div style="font-size:2rem;margin-bottom:12px">✦</div>
+          <div class="nl-success-title">Welcome to the Circle</div>
+          <p class="nl-success-sub">The stars will guide your inbox.</p>
         </div>
       </div>
 
-      <footer class="app-footer">
-        © 2026 Cosmic Energy Daily · Guided by the stars, grounded in truth
-      </footer>
+      <footer class="app-footer">© 2026 Cosmic Energy Daily · Guided by the stars, grounded in truth</footer>
     </section>
 
   </main>
+</div><!-- /app-shell -->
 
-  <!-- Scripts — keep your existing pipeline intact -->
-  <script src="assets/js/data.js"></script>
-  <script src="assets/js/stars.js"></script>
-  <script src="assets/js/app-ui.js"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/stars.js"></script>
+<script src="assets/js/app-ui.js"></script>
+<script>
+  // Show onboarding or app based on stored sign
+  document.addEventListener('DOMContentLoaded', () => {
+    const stored = localStorage.getItem('ced_sign');
+    if (stored === null) {
+      document.getElementById('onboarding-screen').style.display = 'flex';
+    } else {
+      document.getElementById('app-shell').style.display = 'block';
+    }
+  });
+  // Called from app-ui selectSign after onboarding
+  const _origSelect = window.selectSign;
+  // Override selectSign to handle onboarding → app transition
+  document.addEventListener('DOMContentLoaded', () => {
+    const origSelect = selectSign;
+    window.selectSign = function(idx) {
+      document.getElementById('onboarding-screen').style.display = 'none';
+      document.getElementById('app-shell').style.display = 'block';
+      origSelect(idx);
+    };
+  });
+</script>
 </body>
 </html>
