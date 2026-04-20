@@ -102,7 +102,18 @@ document.addEventListener('DOMContentLoaded', () => {
     showReading(currentSignIdx);
     updateProfileCard(currentSignIdx);
   }
+
+  if (localStorage.getItem('ced_nav_collapsed') === '1') {
+    document.getElementById('bottom-nav').classList.add('collapsed');
+  }
 });
+
+/* ── NAV COLLAPSE ──────────────────────────────────────────── */
+function toggleNav() {
+  const nav = document.getElementById('bottom-nav');
+  const collapsed = nav.classList.toggle('collapsed');
+  localStorage.setItem('ced_nav_collapsed', collapsed ? '1' : '0');
+}
 
 /* ── DATE PILL ─────────────────────────────────────────────── */
 function setDatePill() {
