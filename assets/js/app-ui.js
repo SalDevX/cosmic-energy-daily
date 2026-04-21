@@ -438,6 +438,16 @@ function submitNewsletter() {
     if (msg) { msg.style.color = '#ff6b6b'; msg.textContent = 'Please fill all fields and agree to the privacy policy.'; }
     return;
   }
+
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzCDo8bOVUUBsGJlWlAMIUDegu1hA_HbkbwQQBqVNS1LhcDRa7dN0QcavmgCMRHCQ4K/exec';
+
+  fetch(SCRIPT_URL, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email, sign, agreed: agree }),
+  }).catch(() => {}); // no-cors — response is opaque, silently ignore errors
+
   if (form)    form.style.display    = 'none';
   if (success) success.style.display = 'flex';
 }
