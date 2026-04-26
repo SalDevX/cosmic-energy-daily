@@ -14,4 +14,4 @@ const signs=[
 ];
 
 // ── UPDATE THESE DAILY with your YouTube video IDs ──
-const ytIds={Aries:'VP3PdlqG36I',Taurus:'2j0dqPl4JTc',Gemini:'2zwzzOMiFgk',Cancer:'4zhCIvF-uvc',Leo:'mZWze6_VVq4',Virgo:'aaiZzWmCsYU',Libra:'Jsr7efcgD9o',Scorpio:'Kl6pZ5iDXrM',Sagittarius:'GgyxJYuAnyg',Capricorn:'Lb2uaiC9UPw',Aquarius:'DXv_e3zToOw',Pisces:'O4DUVSrLV5s'};
+const ytIds={Aries:'VP3PdlqG36I',Taurus:'2j0dqPl4JTc',Gemini:'2zwzzOMiFgk',Cancer:'4zhCIvF-uvc',Leo:'2dgoFwgzlGk',Virgo:'aaiZzWmCsYU',Libra:'Jsr7efcgD9o',Scorpio:'Kl6pZ5iDXrM',Sagittarius:'GgyxJYuAnyg',Capricorn:'Lb2uaiC9UPw',Aquarius:'DXv_e3zToOw',Pisces:'O4DUVSrLV5s'};
